@@ -1,4 +1,4 @@
-# audio-visualizer
+# sound-visualizer
 
 ## Description
 
