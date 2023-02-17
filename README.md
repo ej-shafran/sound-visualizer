@@ -23,7 +23,7 @@ The `continuous` version (technically referred to as an oscillogram) is similar 
 The `current` version (a simple soundwave visualization) displays what is being currently recorded as a wave,
 moving up and down according to frequency.
 
-The easiest way to see the difference between the two is to visit [the codepen](https://codesandbox.io/p/sandbox/competent-curran-wpmxlu?selection=%5B%7B%22endColumn%22%3A10%2C%22endLineNumber%22%3A19%2C%22startColumn%22%3A10%2C%22startLineNumber%22%3A19%7D%5D).
+The easiest way to see the difference between the two is to visit [the codesandbox](https://codesandbox.io/p/sandbox/competent-curran-wpmxlu?selection=%5B%7B%22endColumn%22%3A10%2C%22endLineNumber%22%3A19%2C%22startColumn%22%3A10%2C%22startLineNumber%22%3A19%7D%5D).
 
 To use one or the other, simply import them:
 
