@@ -1,10 +1,18 @@
 import { DrawCurrentOptions } from "./draw/options";
 
-import { drawCurrentWaves } from "./draw/impure";
-import { clearCanvas } from "common/draw/impure";
+import { drawCurrentWave } from "./draw/impure";
+import { clearCanvas } from "../common/draw/impure";
 
 /**
- * @impure
+ * Sets up a current sound visualizer.
+ *
+ * @impure this function returns impure functions.
+ *
+ * @param audio the audio to visualize.
+ * @param canvas the canvas to draw to.
+ * @param drawOptions additional options for the sound visualizer. See the `DrawCurrentOptions` type.
+ *
+ * @returns functions used to visualize the audio. See the `VisualizerFunctions` type.
  **/
 export function currentVisualizer(
   audio: MediaStream,
@@ -24,7 +32,7 @@ export function currentVisualizer(
     function tick() {
       analyser.getByteTimeDomainData(dataArray);
 
-      drawCurrentWaves(canvas, dataArray, drawOptions);
+      drawCurrentWave(canvas, dataArray, drawOptions);
 
       animationFrameId = requestAnimationFrame(tick);
     }
@@ -36,7 +44,6 @@ export function currentVisualizer(
     if (animationFrameId !== null) cancelAnimationFrame(animationFrameId);
     analyser.disconnect();
     source.disconnect();
-    audio.getTracks().forEach((track) => track.stop());
   }
 
   function reset() {

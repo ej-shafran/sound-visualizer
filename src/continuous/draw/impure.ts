@@ -1,6 +1,6 @@
 import { DrawContinuousOptions, defaultOptions } from "./options";
 import { calculateLine } from "./pure";
-import { widthFromOption } from "common/draw/pure";
+import { widthFromOption } from "../../common/draw/pure";
 
 /**
  * @impure
@@ -16,7 +16,7 @@ export function drawContinuousWave(
   const { strokeColor = "#000000", lineWidth = "default", slices = 100 } = options;
   const { height, width } = canvas;
 
-  context.lineWidth = widthFromOption(lineWidth);
+  context.lineWidth = widthFromOption(lineWidth, width);
   context.strokeStyle = strokeColor;
 
   context.clearRect(0, 0, width, height);

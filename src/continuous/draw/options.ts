@@ -1,10 +1,18 @@
-import { DrawOptions, defaultDrawOptions } from "common/draw/options";
+import { DrawOptions, defaultDrawOptions } from "../../common/draw/options";
 
+/**
+ * The options for the `continuousVisualizer` function, specifically.
+ */
 export interface DrawContinuousOptions extends DrawOptions {
-    slices?: number;
+  /**
+   * Amount of slices to draw for visualized wave.
+   *
+   * @default 100
+   */
+  slices?: number;
 }
 
 export const defaultOptions = {
-    ...defaultDrawOptions,
-    slices: 100,
-}
+  ...defaultDrawOptions,
+  slices: 100,
+};

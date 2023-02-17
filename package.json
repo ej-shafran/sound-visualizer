@@ -1,12 +1,28 @@
 {
-  "name": "audio-visualizer",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-      "build": "tsc"
-  },
+  "name": "sound-visualizer",
+  "version": "0.0.6-alpha",
+  "description": "",
+  "main": "index.js",
   "devDependencies": {
-    "typescript": "^4.9.3"
-  }
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "build": "tsc && copy .\\package.json .\\dist\\package.json && copy .\\README.md .\\dist\\README.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ej-shafran/audio-visualizer.git"
+  },
+  "keywords": [
+    "audio",
+    "visualizer",
+    "vanillajs"
+  ],
+  "author": "ej-shafran",
+  "license": "ISC",
+  "types": "./index.d.ts",
+  "bugs": {
+    "url": "https://github.com/ej-shafran/audio-visualizer/issues"
+  },
+  "homepage": "https://github.com/ej-shafran/audio-visualizer#readme"
 }

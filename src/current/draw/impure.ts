@@ -1,10 +1,16 @@
 import { defaultOptions, DrawCurrentOptions } from "./options";
-import { widthFromOption } from "common/draw/pure";
+import { widthFromOption } from "../../common/draw/pure";
 
 /**
- * @impure
+ * Draws audio data (a `Uint8Array` modified by `AnalyserNode.getByteTimeDomainData`) to the canvas as a wave.
+ *
+ * @impure this function mutates the state of the canvas, and has no return value.
+ *
+ * @param canvas the canvas to draw to.
+ * @param audioData the audio data to draw.
+ * @param options additional options for the draw operation. See the `DrawCurrentOptions` type.
  **/
-export function drawCurrentWaves(
+export function drawCurrentWave(
   canvas: HTMLCanvasElement,
   audioData: Uint8Array,
   options: DrawCurrentOptions = defaultOptions
@@ -21,10 +27,9 @@ export function drawCurrentWaves(
 
   const sliceWidth = width / audioData.length;
 
-  context.lineWidth = widthFromOption(lineWidth);
+  context.lineWidth = widthFromOption(lineWidth, width);
   context.strokeStyle = strokeColor;
 
-  // reset and move to the middle of the left border
   context.clearRect(0, 0, width, height);
   context.beginPath();
   context.moveTo(0, height / 2);
