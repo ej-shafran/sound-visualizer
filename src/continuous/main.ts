@@ -22,7 +22,7 @@ export function continuousVisualizer(
 ) {
   let animationFrameId: number | null = null;
 
-  const audioHistory: number[] = new Array(100);
+  const audioHistory: number[] = new Array(drawOptions?.slices ?? 100);
 
   const audioContext = new window.AudioContext();
   const analyser = audioContext.createAnalyser();
