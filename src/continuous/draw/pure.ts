@@ -11,7 +11,7 @@
  **/
 export function calculateLine(canvasHeight: number, value: number) {
   let fraction = value / 255;
-  if (fraction < 0.01) fraction += 0.01;
+  if (fraction < 0.05) fraction += 0.05;
   const start = (canvasHeight / 2) * fraction;
   const end = canvasHeight - start;
 
