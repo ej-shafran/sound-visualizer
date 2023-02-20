@@ -1,13 +1,13 @@
 {
   "name": "sound-visualizer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "devDependencies": {
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "build": "tsc && copy .\\package.json .\\dist\\package.json && copy .\\README.md .\\dist\\README.md"
+    "build": "tsc && cp ./package.json ./dist/package.json && cp ./README.md ./dist/README.md && cp ./.npmrc ./dist/.npmrc"
   },
   "repository": {
     "type": "git",
