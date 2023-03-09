@@ -35,6 +35,9 @@ export function continuousVisualizer(
    * @impure this function mutates the state of the canvas and has no return value.
    */
   function start() {
+    if (animationFrameId !== null) cancelAnimationFrame(animationFrameId);
+    clearCanvas(canvas);
+
     source.connect(analyser);
 
     function tick() {

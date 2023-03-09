@@ -27,6 +27,9 @@ export function currentVisualizer(
   const source = audioContext.createMediaStreamSource(audio);
 
   function start() {
+    if (animationFrameId !== null) cancelAnimationFrame(animationFrameId);
+    clearCanvas(canvas);
+
     source.connect(analyser);
 
     function tick() {
