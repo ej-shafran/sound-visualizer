@@ -1,6 +1,6 @@
 {
   "name": "sound-visualizer",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "",
   "main": "index.js",
   "devDependencies": {
@@ -16,7 +16,17 @@
   "keywords": [
     "audio",
     "visualizer",
-    "vanillajs"
+    "vanillajs",
+    "sound",
+    "audio-visualizer",
+    "sound-visualizer",
+    "microphone",
+    "recording",
+    "microphone-recording",
+    "recording-visualizer",
+    "microphone-visualizer",
+    "waveform",
+    "waveform-visualizer"
   ],
   "author": "ej-shafran",
   "license": "ISC",
