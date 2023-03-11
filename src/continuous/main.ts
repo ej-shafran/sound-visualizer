@@ -3,6 +3,7 @@ import { frequencyValue } from "./wave/pure";
 
 import { drawContinuousWave } from "./draw/impure";
 import { clearCanvas } from "../common/draw/impure";
+import { startAnalysis } from "../helpers/impure";
 
 /**
  * Sets up a continuous sound visualizer.
@@ -24,10 +25,7 @@ export function continuousVisualizer(
 
   const audioHistory: number[] = new Array(drawOptions?.slices ?? 100);
 
-  const audioContext = new window.AudioContext();
-  const analyser = audioContext.createAnalyser();
-  const dataArray = new Uint8Array(analyser.frequencyBinCount);
-  const source = audioContext.createMediaStreamSource(audio);
+  const { analyse, disconnect } = startAnalysis(audio);
 
   /**
    * Starts the continuous sound visualizer.
@@ -38,11 +36,8 @@ export function continuousVisualizer(
     if (animationFrameId !== null) cancelAnimationFrame(animationFrameId);
     clearCanvas(canvas);
 
-    source.connect(analyser);
-
     function tick() {
-      analyser.getByteTimeDomainData(dataArray);
-      audioHistory.push(frequencyValue(dataArray));
+      audioHistory.push(frequencyValue(analyse()));
 
       drawContinuousWave(canvas, audioHistory, drawOptions);
 
@@ -59,8 +54,7 @@ export function continuousVisualizer(
    */
   function stop() {
     if (animationFrameId !== null) cancelAnimationFrame(animationFrameId);
-    analyser.disconnect();
-    source.disconnect();
+    disconnect();
   }
 
   /**

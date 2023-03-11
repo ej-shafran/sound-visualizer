@@ -1,4 +1,8 @@
-import { THICKNESS_MAP } from "./constants";
+const THICKNESS_MAP = {
+  thin: 1,
+  default: 2,
+  thick: 2.75,
+} as const;
 
 /**
  * Transforms the `lineWidth` option passed into a visualizer function
@@ -13,7 +17,7 @@ import { THICKNESS_MAP } from "./constants";
  **/
 export function widthFromOption(
   lineWidth: number | "thin" | "default" | "thick",
-  canvasWidth: number
+  canvasWidth: number,
 ) {
   if (typeof lineWidth === "number") return lineWidth;
 
