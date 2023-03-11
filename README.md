@@ -88,10 +88,103 @@ export type DrawCurrentOptions = {
 - `strokeColor` (`string`): the color of the wave; **Default:** `"#000"`.
 - `heightNorm` (`number`): a number used to normalize the height of the wave; the wave function is multiplied by this number, so a number larger than `1` will exaggerate the height of the wave, while a number between `0` and `1` will minimize it. **Default:** `1`.
 
+### Helpers
+
+This library also exposes a few of the useful functions used internally by the visualizers.They are seperated into `pure` and `impure`, depending on whether they are pure functions in the functional-programming sense (it was an easy way for me to think about the code :smile_cat:).
+
+#### Pure
+
+##### widthFromOption
+
+```typescript
+export function widthFromOption(
+  lineWidth: number | "thin" | "thick" | "default",
+  canvasWidth: number
+): number;
+```
+
+Used to transform the `"thin" | "thick" | "default"` options for `lineWidth` into a useable `px` value, as a percentage of the canvas' width.
+
+##### calculateLine
+
+```typescript
+export function calculateLine(canvasHeight: number, value: number): { start: number; end: number };
+```
+
+Used to calculate the coordinates on the canvas that should start and end the line visualized at a certain moment in time.
+
+##### waveForm
+
+```typescript
+export function waveForm(array: number[]): number;
+```
+
+Used to calculate the wave-form value for a number array. Equivalent to $Max - Min$ where $Max$ is the maximum value in the array and $Min$ is the minimum value in the array. This helper isn't actually used internally by `sound-visualizer` - `waveFormUint` is used instead - but it's still exposed for convenience. It can also be acheived by doing:
+
+```typescript
+Math.max(...array) - Math.min(...array)
+```
+
+but `waveForm` is simply written to iterate over the array only once.
+
+##### waveFormUint
+
+```typescript
+export function waveFormUint(array: Uint8Array): number;
+```
+
+Identical to `waveForm` but utilizes the maximum and minimum sizes of a Uint8.
+
+##### frequencyValue
+
+```typescript
+export function frequencyValue(array: Uint8Array): number;
+```
+
+Takes the result of `waveFormUint` and flips it, so that a result with a large `waveFormUint` result becomes a small number, and vice versa. This is the function that is actually used by the `continuousVisualizer`, because the `canvas` coordinates work in such a way that a small number is closer to the edge of the canvas.
+
+#### Impure
+
+##### clearCanvas
+
+```typescript
+export function clearCanvas(canvas: HTMLCanvasElement): void;
+```
+
+Clears a canvas with a 2d context.
+
+##### drawContinuousWave
+
+```typescript
+export function drawContinuousWave(
+  canvas: HTMLCanvasElement,
+  audioHistory: number[],
+  options: DrawContinuousOptions = defaultOptions
+): void;
+```
+
+Function used to draw for every `tick` of the `continuousVisualizer`. `audioHistory` is an array of frequency values for the calculated history of the audio.
+
+##### drawCurrentWave
+
+```typescript
+export function drawCurrentWave(
+  canvas: HTMLCanvasElement,
+  audioData: Uint8Array,
+  options: DrawCurrentOptions = defaultOptions
+): void;
+```
+
+Function used to draw for every `tick` of the `currentVisualizer`.
+
+##### startAnalysis
+
+```typescript
+export function startAnalysis(audio: MediaStream): { analyse: () => Uint8Array, disconnect: () => void };
+```
+
+Function used to analyse the current audio's `byteTimeDomainData`. Abstracts away the pretty unreadable actions required to get the desired `Uint8Array` (which is later passed to `drawCurrentWave` or calculated with `frequencyValue` and added to the `audioHistory` array).
+
 #### Additional notes
 
 The `ContinuousVisualizer` and `CurrentVisualizer` types are exported from this package, and an additional `Visualizer` type is exported for convenience, which is a union type for both.
-
-In addition to importing from `sound-visualizer`, a few helper functions are available for import from `sound-visualizer/helpers/pure` and `sound-visualizer/helpers/impure`.
-
-`helpers/pure` includes helper functions that do not mutate state and are deterministic; `helpers/impure` includes helper functions that change state, particularly of the `canvas`. These functions are used internally by `sound-visualizer`, and you likely do not need to use them directly, but they are available for convenience.
