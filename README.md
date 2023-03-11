@@ -141,7 +141,7 @@ Identical to `waveForm` but utilizes the maximum and minimum sizes of a Uint8.
 export function frequencyValue(array: Uint8Array): number;
 ```
 
-Takes the result of `waveFormUint` and flips it, so that a result with a large `waveFormUint` result becomes a small number, and vice versa. This is the function that is actually used by the `continuousVisualizer`, because the `canvas` coordinates work in such a way that a small number is closer to the edge of the canvas.
+Takes the result of `waveFormUint` and flips it, so that a large `waveFormUint` result becomes a small number, and vice versa. This is the function that is actually used by the `continuousVisualizer`, because the `canvas` coordinates work in such a way that a small number is closer to the edge of the canvas.
 
 #### Impure
 
