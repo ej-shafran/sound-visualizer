@@ -8,7 +8,7 @@ import { widthFromOption } from "../../common/draw/pure";
 export function drawContinuousWave(
   canvas: HTMLCanvasElement,
   audioHistory: number[],
-  options: DrawContinuousOptions = defaultOptions
+  options: DrawContinuousOptions = defaultOptions,
 ) {
   const context = canvas.getContext("2d");
   if (!context) return;
@@ -25,10 +25,12 @@ export function drawContinuousWave(
 
   const sliceWidth = width / slices;
 
+  const historyToCheck = audioHistory.slice(-slices);
+
   for (let i = 0; i < slices; i++) {
     if (i >= audioHistory.length) break;
 
-    const value = audioHistory.slice(-slices)[i];
+    const value = historyToCheck[i];
     const { start, end } = calculateLine(height, value);
 
     const x = i * sliceWidth;
