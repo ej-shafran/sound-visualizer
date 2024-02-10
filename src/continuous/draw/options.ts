@@ -10,9 +10,19 @@ export interface DrawContinuousOptions extends DrawOptions {
    * @default 100
    */
   slices?: number;
+
+  /**
+   * Border radius of the bar
+   *
+   * 0 will draw a normal rect
+   *
+   * @default 0
+   */
+  roundedRadius?: number;
 }
 
-export const defaultOptions = {
+export const defaultOptions: DrawContinuousOptions = {
   ...defaultDrawOptions,
   slices: 100,
+  roundedRadius: 0,
 };
