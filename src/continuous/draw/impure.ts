@@ -19,6 +19,8 @@ export function drawContinuousWave(
   const w = widthFromOption(lineWidth, width);
   context.lineWidth = w;
   context.strokeStyle = strokeColor;
+  context.fillStyle = strokeColor;
+
 
   context.clearRect(0, 0, width, height);
   context.beginPath();
