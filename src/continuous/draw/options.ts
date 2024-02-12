@@ -14,15 +14,15 @@ export interface DrawContinuousOptions extends DrawOptions {
   /**
    * Border radius of the bar
    *
-   * 0 will draw a normal rect
+   * 0 will draw a normal rectangle
    *
    * @default 0
    */
-  roundedRadius?: number;
+  barRadius?: number;
 }
 
 export const defaultOptions: DrawContinuousOptions = {
   ...defaultDrawOptions,
   slices: 100,
-  roundedRadius: 0,
+  barRadius: 0,
 };

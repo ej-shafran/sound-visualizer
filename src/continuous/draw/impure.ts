@@ -13,14 +13,11 @@ export function drawContinuousWave(
   const context = canvas.getContext("2d");
   if (!context) return;
 
-  const { strokeColor = "#000000", lineWidth = "default", slices = 100, roundedRadius = 0 } = options;
+  const { strokeColor = "#000000", rectWidth = "default", slices = 100, barRadius = 0 } = options;
   const { height, width } = canvas;
 
-  const w = widthFromOption(lineWidth, width);
-  context.lineWidth = w;
-  context.strokeStyle = strokeColor;
+  const w = widthFromOption(rectWidth, width);
   context.fillStyle = strokeColor;
-
 
   context.clearRect(0, 0, width, height);
   context.beginPath();
@@ -37,10 +34,10 @@ export function drawContinuousWave(
 
     const x = i * sliceWidth;
 
-    if (roundedRadius <= 0) {
+    if (barRadius <= 0) {
       context.rect(x, start, w, end - start);
     } else {
-      context.roundRect(x, start, w, end - start, roundedRadius);
+      context.roundRect(x, start, w, end - start, barRadius);
     }
   }
 
