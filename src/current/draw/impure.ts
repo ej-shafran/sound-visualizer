@@ -18,16 +18,12 @@ export function drawCurrentWave(
   const context = canvas.getContext("2d");
   if (!context) return;
 
-  const {
-    strokeColor = "#000",
-    lineWidth = "default",
-    heightNorm = 1,
-  } = options;
+  const { strokeColor = "#000", rectWidth = "default", heightNorm = 1 } = options;
   const { height, width } = canvas;
 
   const sliceWidth = width / audioData.length;
 
-  context.lineWidth = widthFromOption(lineWidth, width);
+  context.lineWidth = widthFromOption(rectWidth, width);
   context.strokeStyle = strokeColor;
 
   context.clearRect(0, 0, width, height);

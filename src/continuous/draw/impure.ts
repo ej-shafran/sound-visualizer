@@ -8,20 +8,19 @@ import { widthFromOption } from "../../common/draw/pure";
 export function drawContinuousWave(
   canvas: HTMLCanvasElement,
   audioHistory: number[],
-  options: DrawContinuousOptions = defaultOptions,
+  options: DrawContinuousOptions = defaultOptions
 ) {
   const context = canvas.getContext("2d");
   if (!context) return;
 
-  const { strokeColor = "#000000", lineWidth = "default", slices = 100 } = options;
+  const { strokeColor = "#000000", rectWidth = "default", slices = 100, barRadius = 0 } = options;
   const { height, width } = canvas;
 
-  context.lineWidth = widthFromOption(lineWidth, width);
-  context.strokeStyle = strokeColor;
+  const w = widthFromOption(rectWidth, width);
+  context.fillStyle = strokeColor;
 
   context.clearRect(0, 0, width, height);
   context.beginPath();
-  context.moveTo(0, height);
 
   const sliceWidth = width / slices;
 
@@ -35,9 +34,12 @@ export function drawContinuousWave(
 
     const x = i * sliceWidth;
 
-    context.moveTo(x, start);
-    context.lineTo(x, end);
+    if (barRadius <= 0) {
+      context.rect(x, start, w, end - start);
+    } else {
+      context.roundRect(x, start, w, end - start, barRadius);
+    }
   }
 
-  context.stroke();
+  context.fill();
 }

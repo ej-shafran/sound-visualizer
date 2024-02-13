@@ -9,14 +9,14 @@ export interface DrawOptions {
    */
   strokeColor?: string;
   /**
-   * The thickness of the line used to draw the wave.
+   * The thickness of the bar used to draw the wave.
    *
    * If a number is provided, it will be used as a `px` value.
    * If a thickness string is provided, it will be transformed into a percentage of the canvas width.
    *
    * @default "default"
    */
-  lineWidth?: number | "thick" | "thin" | "default";
+  rectWidth?: number | "thick" | "thin" | "default";
 }
 
 /**
@@ -24,5 +24,5 @@ export interface DrawOptions {
  */
 export const defaultDrawOptions: DrawOptions = {
   strokeColor: "#000",
-  lineWidth: 2,
+  rectWidth: 2,
 };

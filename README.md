@@ -67,13 +67,14 @@ export type DrawContinuousOptions = {
     lineWidth?: "thin" | "default" | "thick" | number;
     strokeColor?: string;
     slices?: number;
+    barRadius?: number;
 }
 ```
 
 - `lineWidth` (`number` | `string`): the width of the lines that make up the wave; if a thickness string is provided, it will be translated into a percentage of the canvas's width, if a number is provided it will be used a `px` value. **Default:** `"default"`.
 - `strokeColor` (`string`): the color of the wave; **Default:** `"#000"`.
 - `slices` (`number`): the number of slices drawn onto the canvas to make up the wave; **Default:** `100`.
-
+- `barRadius` (`number`): the border radius of each bar, setting `0` will draw a normal rectangle; **Default:** `0`.
 ##### Current Visualizer
 
 ```typescript
