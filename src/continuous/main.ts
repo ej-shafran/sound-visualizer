@@ -34,7 +34,6 @@ export function continuousVisualizer(
    */
   function start() {
     if (animationFrameId !== null) cancelAnimationFrame(animationFrameId);
-    clearCanvas(canvas);
 
     function tick() {
       audioHistory.push(frequencyValue(analyse()));

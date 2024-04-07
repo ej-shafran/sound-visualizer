@@ -26,7 +26,6 @@ export function currentVisualizer(
 
   function start() {
     if (animationFrameId !== null) cancelAnimationFrame(animationFrameId);
-    clearCanvas(canvas);
 
     function tick() {
       drawCurrentWave(canvas, analyse(), drawOptions);
